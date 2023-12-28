@@ -14,6 +14,8 @@ struct Args {
 }
 
 fn main() {
+    srand(std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs());
+
     let args = Args::parse();
 
     let file = std::fs::read(args.file).unwrap();

@@ -73,9 +73,9 @@ impl Filter {
                     r += &(replace_multi(BENTI_CHAR_RT, &w) + " ");
                 }
 
-                let xd = "xd".repeat(rand_limit(0, 11) as usize % 4);
+                let xd = "xd".repeat(rand_limit(0, 11) as usize / 4);
 
-                r + &xd
+                r[..r.len()-1].to_string() + &xd
             },
         }
     }
@@ -105,7 +105,7 @@ fn rand() -> u64 {
     }
 }
 
-fn srand(seed: u64) {
+pub fn srand(seed: u64) {
     unsafe {
         RAND_SEED = seed;
     }
