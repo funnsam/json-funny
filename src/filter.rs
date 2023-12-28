@@ -54,6 +54,12 @@ impl Filter {
                 let s = s.to_lowercase().replace("dont know", "no no");
 
                 for (i, w) in s.split_whitespace().enumerate() {
+                    if is_formatting(w) {
+                        r += w;
+                        r += " ";
+                        continue;
+                    }
+
                     let b_chance = rand_limit(1, (i+1).min(4) as u64);
 
                     let mut w = w.replace("ate", "8").replace("ait", "8");
@@ -123,4 +129,19 @@ pub fn srand(seed: u64) {
 
 fn rand_limit(l: u64, u: u64) -> u64 {
     (rand() % (u - l + 1)) + l
+}
+
+fn is_formatting(s: &str) -> bool {
+    let mut i = s.chars();
+    for j in i.by_ref() {
+        if j == '%' {
+            return if i.count() != 0 {
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    false
 }
