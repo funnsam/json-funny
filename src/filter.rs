@@ -40,6 +40,7 @@ const BENTI_CHAR_RT: ReplaceTable = &[
     ("t", "7"),
     ("v", ":b:"),
     ("l", "]"),
+    ("p", "["),
 ];
 
 impl Filter {
