@@ -51,7 +51,7 @@ impl Filter {
         match self {
             Self::Benti => {
                 let mut r = String::new();
-                let s = s.to_lowercase().replace("i dont know", "me no no");
+                let s = s.to_lowercase().replace("dont know", "no no");
 
                 for (i, w) in s.split_whitespace().enumerate() {
                     let b_chance = rand_limit(1, (i+1).min(4) as u64);
@@ -60,14 +60,14 @@ impl Filter {
 
                     if let Some(c) = w.chars().nth(0) {
                         if c == 'p' {
-                            w = "b".to_string() + &w[1..];
+                            w = "b".to_string() + &w.chars().skip(1).collect::<String>();
                         }
                     }
 
-                    w = replace_multi(BENTI_WORD_RT, &w);
+                    w = replace_all(BENTI_WORD_RT, &w);
 
                     if b_chance == 1 {
-                        w = "b".to_string() + &w[1..];
+                        w = "b".to_string() + &w.chars().skip(1).collect::<String>();
                     }
 
                     r += &(replace_multi(BENTI_CHAR_RT, &w) + " ");
@@ -75,10 +75,20 @@ impl Filter {
 
                 let xd = "xd".repeat(rand_limit(0, 11) as usize / 4);
 
-                r[..r.len()-1].to_string() + &xd
+                r.chars().take(r.chars().count()-1).collect::<String>() + &xd
             },
         }
     }
+}
+
+fn replace_all(rt: ReplaceTable, s: &str) -> String {
+    for (o, n) in rt.iter() {
+        if &s == o {
+            return n.to_string();
+        }
+    }
+
+    s.to_string()
 }
 
 fn replace_multi(rt: ReplaceTable, s: &str) -> String {
