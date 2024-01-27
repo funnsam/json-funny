@@ -44,8 +44,11 @@ const BENTI_CHAR_RT: ReplaceTable = &[
 ];
 
 impl Filter {
-    pub fn filtered(&self, s: &mut String) {
+    pub fn filtered(&self, s: &mut String, args: &crate::Args) {
         *s = self.filter(s);
+        if args.minecraft {
+            *s = s.replace('\u{1F171}', "\u{E042}");
+        }
     }
 
     pub fn filter(&self, s: &str) -> String {
