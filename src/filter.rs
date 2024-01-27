@@ -31,14 +31,14 @@ const BENTI_WORD_RT: ReplaceTable = &[
 
 const BENTI_CHAR_RT: ReplaceTable = &[
     ("a", "4"),
-    ("b", ":b:"),
+    ("b", "\u{1F171}"),
     ("e", "3"),
     ("i", "1"),
-    ("m", ":m:"),
+    ("m", "\u{24C2}"),
     ("o", "0"),
     ("s", "5"),
     ("t", "7"),
-    ("v", ":b:"),
+    ("v", "\u{1F171}"),
     ("l", "]"),
     ("p", "["),
 ];
