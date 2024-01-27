@@ -47,7 +47,8 @@ impl Filter {
     pub fn filtered(&self, s: &mut String, args: &crate::Args) {
         *s = self.filter(s);
         if args.minecraft {
-            *s = s.replace('\u{1F171}', "\u{E042}");
+            *s = s.replace('\u{1F171}', "B")
+                .replace('\u{24C2}', "M");
         }
     }
 
